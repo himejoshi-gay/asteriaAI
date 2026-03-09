@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS connections (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    discord_user_id TEXT UNIQUE NOT NULL,
+    osu_user_id TEXT NOT NULL
+);

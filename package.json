@@ -1,0 +1,41 @@
+{
+  "name": "sunshinediscordbot",
+  "type": "module",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "generate:openapi": "dotenv -e .env -- openapi-ts",
+    "lint": "eslint --fix",
+    "lint:check": "eslint",
+    "start": "bun src/index.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "@sapphire/decorators": "^6.2.0",
+    "@sapphire/discord.js-utilities": "^7.3.3",
+    "@sapphire/framework": "^5.3.6",
+    "@sapphire/plugin-logger": "^4.1.0",
+    "@sapphire/plugin-subcommands": "^7.0.1",
+    "@sapphire/plugin-utilities-store": "^2.0.3",
+    "@sapphire/time-utilities": "^1.7.14",
+    "@sapphire/utilities": "^3.18.2",
+    "bun-sqlite-migrations": "^1.0.2",
+    "discord.js": "^14.21.0",
+    "fast-average-color-node": "^3.1.0"
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.78.1",
+    "@richardscull/eslint-config": "^1.0.6",
+    "@types/bun": "latest",
+    "dotenv-cli": "^8.0.0",
+    "eslint": "^9.39.2",
+    "jiti": "^2.6.1",
+    "lint-staged": "^16.2.7",
+    "simple-git-hooks": "^2.13.1",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,14 @@
+services:
+  sunshine-discord-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/data
+    environment:
+      NODE_ENV: prod
+      DISCORD_TOKEN: $DISCORD_TOKEN
+      NEW_SCORES_CHANNED_ID: $NEW_SCORES_CHANNED_ID
+      BEATMAPS_STATUSES_CHANNED_ID: $BEATMAPS_STATUSES_CHANNED_ID
+      SUNRISE_URI: $SUNRISE_URI
+    restart: unless-stopped
