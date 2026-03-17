@@ -85,6 +85,6 @@ export async function chatInputRunLinkSubcommand(
   const { embedPresets } = this.container.utilities;
 
   return await interaction.editReply({
-    embeds: [embedPresets.getSuccessEmbed(`You are now ${bold(user.username)}!`)],
+    embeds: [embedPresets.getSuccessEmbed(`🙂 You are now ${bold(user.username)}!`)],
   });
 }
