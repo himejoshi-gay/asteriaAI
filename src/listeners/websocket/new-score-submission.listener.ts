@@ -28,14 +28,14 @@ export class NewScoreSubmissionListener extends Listener {
         id: score.beatmap_id,
       },
       query: {
-        mode: score.game_mode,
+        mode: score.game_mode_extended,
         limit: 1,
       },
     });
 
     if (!leaderboard || leaderboard.error) {
       this.container.client.logger.error(
-        `NewScoreSubmissionListener: Couldn't fetch leaderboard for beatmap ${score.beatmap_id} in ${score.game_mode}.`,
+        `NewScoreSubmissionListener: Couldn't fetch leaderboard for beatmap ${score.beatmap_id} in ${score.game_mode_extended}.`,
       );
       return;
     }
