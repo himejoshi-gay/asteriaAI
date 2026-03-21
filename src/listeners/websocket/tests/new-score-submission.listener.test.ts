@@ -43,7 +43,8 @@ describe("New Score Submission Listener", () => {
     const score = FakerGenerator.generateScore({
       id: 42,
       beatmap_id: 1337,
-      game_mode: GameMode.MANIA,
+      game_mode: GameMode.STANDARD,
+      game_mode_extended: GameMode.RELAX_STANDARD,
     });
     const beatmap = FakerGenerator.generateBeatmap({ id: score.beatmap_id });
     const scoreEmbed = { data: { title: "score embed" } };
@@ -66,6 +67,15 @@ describe("New Score Submission Listener", () => {
 
     await listener.run(score);
 
+    expect(getBeatmapByIdLeaderboardMock).toHaveBeenCalledWith({
+      path: {
+        id: score.beatmap_id,
+      },
+      query: {
+        mode: GameMode.RELAX_STANDARD,
+        limit: 1,
+      },
+    });
     expect(sendMock).toHaveBeenCalledWith({
       embeds: [scoreEmbed],
       components: [
