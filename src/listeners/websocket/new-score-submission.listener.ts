@@ -32,7 +32,7 @@ export class NewScoreSubmissionListener extends Listener {
       },
       query: {
         mode: score.game_mode_extended,
-        limit: 1,
+        limit: 2,
       },
     });
 
@@ -77,8 +77,15 @@ export class NewScoreSubmissionListener extends Listener {
       return;
     }
 
+    const previousTopScore = leaderboard.data.scores[1];
+
     const { embedPresets } = this.container.utilities;
-    const scoreEmbed = await embedPresets.getScoreEmbed(score, beatmap.data, true);
+    const scoreEmbed = await embedPresets.getScoreEmbed(
+      score,
+      beatmap.data,
+      true,
+      previousTopScore,
+    );
 
     const buttons = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()

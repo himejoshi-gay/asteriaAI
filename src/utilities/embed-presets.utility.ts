@@ -179,6 +179,7 @@ export class EmbedPresetsUtility extends Utility {
     score: ScoreResponse,
     beatmap: BeatmapResponse,
     isScoreNew = false,
+    previousTopScore?: ScoreResponse,
   ) {
     if (score.mods_int && score.mods_int > 0) {
       const pp = await getBeatmapByIdPp({
@@ -209,7 +210,7 @@ export class EmbedPresetsUtility extends Utility {
 
     const whenPlayedDate = new Date(score.when_played);
 
-    const titleText = isScoreNew ? "new score submission" : "submitted score";
+    const titleText = isScoreNew ? "new #1" : "submitted score";
 
     let hitCounts = null;
 
@@ -262,6 +263,21 @@ export class EmbedPresetsUtility extends Utility {
         text: `${score.game_mode_extended} · played on himejoshi.gay`,
       })
       .setDescription(description);
+
+    if (previousTopScore && previousTopScore.id !== score.id) {
+      const previousMods = previousTopScore.mods?.trim() || "NM";
+      const previousWhenPlayed = new Date(previousTopScore.when_played);
+
+      scoreEmbed.addFields({
+        name: "Previous #1",
+        value:
+          `${bold(previousTopScore.user.username)} · `
+          + `${getScoreRankEmoji(previousTopScore.grade)} ${previousMods} · `
+          + `${numberWith(previousTopScore.total_score, ",")} · `
+          + `${previousTopScore.accuracy.toFixed(2)}% · `
+          + `${bold(time(previousWhenPlayed, "R"))}`,
+      });
+    }
 
     return scoreEmbed;
   }
